@@ -31,7 +31,7 @@ else
     #"Filtered Rows" = Table.SelectRows(#"Added Check", each ([Check] = false)),
     #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"Check"}),
     #"Added Cost Center" = Table.AddColumn(#"Removed Columns", "Cost Center", each if [Helper] = "0407M_BD" or [Helper] = "0407M_SC" then "BD" else
-if [Helper] = "0614_LSF" then "LSF" else if [Helper] = "0614_BU3" then "BU3" else [Cost Center Temp]),
+if [Helper] = "0614M_LSF" then "LSF" else if [Helper] = "0614M_BU3" then "BU3" else [Cost Center Temp]),
     #"Removed Columns Cost Center Temp" = Table.RemoveColumns(#"Added Cost Center",{"Cost Center Temp"}),
     #"Merged Queries" = Table.NestedJoin(#"Removed Columns Cost Center Temp", {"Unit"}, #"Definition 01", {"Mã bộ phận"}, "Definition 01", JoinKind.LeftOuter),
     #"Expanded Definition 1" = Table.ExpandTableColumn(#"Merged Queries", "Definition 01", {"SB/WH"}, {"SB/WH"}),
